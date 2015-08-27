@@ -1,4 +1,3 @@
-import scraperwiki # used for running the scraper and storing data
 import requests # used for retrieving data
 from bs4 import BeautifulSoup # used for parsing data
 import re # used for regular expressions
@@ -7,9 +6,9 @@ import re # used for regular expressions
 def add_location(continent, country, city, db):
     print("%s\t%s\t%s"%(continent,country,city))
     db.append({
-        'continent': decode(continent),
-        'country': decode(country),
-        'city': decode(city)
+        'continent': continent,
+        'country': country,
+        'city': city
     })
 
 # parse table for locations
@@ -78,7 +77,4 @@ def main():
                 # parse table for country and city
                 parse_table(table, continent, db)
         
-    # Write results to the sqlite database using scraperwiki library
-    scraperwiki.sqlite.save(unique_keys=['city'], data=db)
-
 main()
