@@ -7,9 +7,9 @@ import re # used for regular expressions
 def add_location(continent, country, city, db):
     print("%s\t%s\t%s"%(continent,country,city))
     db.append({
-        'continent': continent,
-        'country': country,
-        'city': city
+        'continent': decode(continent),
+        'country': decode(country),
+        'city': decode(city)
     })
 
 # parse table for locations
