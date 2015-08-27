@@ -5,7 +5,6 @@ import re # used for regular expressions
 
 # store results in structured format
 def add_location(continent, country, city, db):
-    print("%s\t%s\t%s"%(continent,country,city))
     db.append({
         'continent': continent.decode('utf-8'),
         'country': country.decode('utf-8'),
@@ -14,6 +13,8 @@ def add_location(continent, country, city, db):
 
 # parse table for locations
 def parse_table(table, continent, db):
+    # print debug message
+    print("Retrieving locations from table for continent %s"%(continent))
     # find all rows in the table
     rows = table.find_all('tr') 
     # find row with column headings
@@ -49,8 +50,11 @@ def parse_table(table, continent, db):
                 city = td1_text
         # remove things written after country names
         country = re.sub(r' - .*','',re.sub(r'organi.*','',country)).strip()
+        # print debug message
+        print("Found city %s for country %s"%(city,country))
         # add to data structure
         add_location(continent, country, city, db)
+    print ""
     
 
 # verify that only tables within a section are retrieved
@@ -61,8 +65,11 @@ def contains_headline(tag):
 def main():
     # initialize data structure
     db = [] 
+    # define wiki page
+    url = 'https://en.wikipedia.org/wiki/List_of_Occupy_movement_protest_locations'
     # request wiki page
-    html = requests.get('https://en.wikipedia.org/wiki/List_of_Occupy_movement_protest_locations').text 
+    print("Retrieving url %s"%(url))
+    html = requests.get(url).text 
     # load page as xml document
     soup = BeautifulSoup(html, 'xml') 
     # find column headings
