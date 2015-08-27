@@ -1,1 +1,1 @@
-This is a scraper that runs on [Morph](https://morph.io). To get started [see the documentation](https://morph.io/documentation)
+This is a scraper that runs on [Morph](https://morph.io) and parses the English Wikipedia page [List of Occupy movement protest locations](https://en.wikipedia.org/wiki/List_of_Occupy_movement_protest_locations) to extract a list of cities and towns where Occupy protests were being held.
